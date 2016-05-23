@@ -1,0 +1,2 @@
+module FutureTripsHelper
+end
