@@ -6,7 +6,7 @@ class SessionController < ApplicationController
     if @user && @user.authenticate(params[:session][:password])
       puts "logging in"
       log_in @user
-      redirect_to students_path
+      redirect_to user_path(@user)
     else
       @errors = ["Invalid Credentials"]
       render partial: 'login', locals: {errors: @errors}
@@ -15,9 +15,9 @@ class SessionController < ApplicationController
 
   def new
     @user = User.new
-    if request.xhr?
-      render partial: 'login'
-    end
+    # if request.xhr?
+      render 'session/new'
+    # end
   end
 
   def destroy

@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
   has_many :future_trips
 
   validates :username, :email, presence: true
-  validates :username, :email, uniqueness: true 
+  validates :username, :email, uniqueness: true
 
 end

@@ -24,7 +24,13 @@ class TripsController < ApplicationController
   # POST /trips
   # POST /trips.json
   def create
-    @trip = Trip.new(trip_params)
+    @user = User.find(session[:user_id])
+    # coordinates = findCoordinates(trip_params[:name])
+    coordinates = Geocoder.coordinates(trip_params[:name])
+    puts coordinates
+    @trip = @user.trips.new(trip_params)
+    @trip.latitude = coordinates[0]
+    @trip.longitude = coordinates[1]
 
     respond_to do |format|
       if @trip.save
@@ -62,6 +68,7 @@ class TripsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_trip
       @trip = Trip.find(params[:id])
@@ -69,6 +76,12 @@ class TripsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
-      params.require(:trip).permit(:user_id, :location, :month, :year, :description, :method_of_travel)
+      params.require(:trip).permit(:name, :user_id, :latitude, :longitude, :month, :year, :description, :method_of_travel)
+    end
+
+    def find_location
+      location = Geocoder.coordinates(trip_params[:name])
+      # render :json => (location)
+      # Geocoder::Calculations.distance_between([47.858205,2.294359], [40.748433,-73.985655])
     end
 end

@@ -2,13 +2,28 @@
 <html>
 <head>
   <title>MapMe</title>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">MapMe</a>
+          <ul class="nav pull-right">
+            <% if logged_in? %>
+              <li><%= link_to current_user.username, @user %></li>
+              <li><%= link_to "Log Out", '/logout' %></li>
+            <% else %>
+              <li><%= link_to "Register", "#" %></li>
+              <li><%= link_to "Log In", "#" %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+      <%= yield %>
 </body>
 </html>

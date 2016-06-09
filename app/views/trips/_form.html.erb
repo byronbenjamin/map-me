@@ -1,4 +1,7 @@
-<%= form_for(@trip) do |f| %>
+<%= simple_form_for(@trip) do |f| %>
+
+<fieldset>
+  <legend>Add Trip</legend>
   <% if @trip.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
@@ -10,6 +13,13 @@
       </ul>
     </div>
   <% end %>
+
+  <%= f.input :name %>
+  <%= f.input :month %>
+  <%= f.input :year %>
+  <%= f.input :description %>
+  <%= f.label "Method Of Travel" %>
+  <%= f.select :method_of_travel, [ 'Airplane', 'Train', 'Boat', 'Other' ], :prompt => 'Select One' %>
 
   <div class="actions">
     <%= f.submit %>

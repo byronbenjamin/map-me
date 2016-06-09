@@ -1,0 +1,19 @@
+
+<div class="span4">
+<%= simple_form_for(:session) do |f| %>
+
+  <fieldset>
+    <legend>Sign In</legend>
+  <%= f.input :email %>
+  <%= f.input :password %>
+
+  <div class="actions">
+    <%= f.button :submit, "Log in" %>
+  </div>
+<% end %>
+
+</div>
+
+<div class="span8">
+  <h2>Somthing is gonna go here</h2>
+</div>

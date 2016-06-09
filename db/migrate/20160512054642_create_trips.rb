@@ -3,7 +3,8 @@ class CreateTrips < ActiveRecord::Migration
     create_table :trips do |t|
       t.string :name
       t.integer :user_id
-      t.string :location
+      t.float :longitude
+      t.float :latitude
       t.string :month
       t.string :year
       t.string :description

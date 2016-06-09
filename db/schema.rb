@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20160512054642) do
   enable_extension "plpgsql"
 
   create_table "future_trips", force: :cascade do |t|
+    t.string   "name"
     t.integer  "user_id"
     t.string   "location"
     t.string   "month"
@@ -27,8 +28,10 @@ ActiveRecord::Schema.define(version: 20160512054642) do
   end
 
   create_table "trips", force: :cascade do |t|
+    t.string   "name"
     t.integer  "user_id"
-    t.string   "location"
+    t.float    "longitude"
+    t.float    "latitude"
     t.string   "month"
     t.string   "year"
     t.string   "description"
