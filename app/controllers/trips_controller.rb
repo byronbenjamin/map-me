@@ -25,12 +25,9 @@ class TripsController < ApplicationController
   # POST /trips.json
   def create
     @user = User.find(session[:user_id])
-    # coordinates = findCoordinates(trip_params[:name])
     coordinates = Geocoder.coordinates(trip_params[:name])
-    puts coordinates
     @trip = @user.trips.new(trip_params)
-    @trip.latitude = coordinates[0]
-    @trip.longitude = coordinates[1]
+    Trip.set_coordinates(@trip)
 
     respond_to do |format|
       if @trip.save

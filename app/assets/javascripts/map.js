@@ -11,9 +11,9 @@ https://developers.google.com/maps/documentation/javascript/examples/infowindow-
 //function to retrieve google map using googles dev api
 function initialize() {
   geocoder = new google.maps.Geocoder();
-  var latlng = new google.maps.LatLng(37.5667, 126.9667);
+  var latlng = new google.maps.LatLng(0, 0);
   var mapOptions = {
-    zoom: 3,
+    zoom: 2,
     center: latlng
   }
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -49,8 +49,12 @@ function addTripToMap(trip){
   var lat = trip.latitude;
   var lng = trip.longitude;
 
+
+
   var infowindow = new google.maps.InfoWindow({
-                content: trip.name
+                content: "<h1>" + trip.name + "</h1><br>" +
+                        "<h1>" + trip.description + "</h1><br>"
+
                 });
 
   var marker = new google.maps.Marker({

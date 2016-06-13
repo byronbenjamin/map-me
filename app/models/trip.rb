@@ -2,10 +2,11 @@ class Trip < ActiveRecord::Base
 
   belongs_to :user
 
-  geocoded_by :name
-
-  def findCoordinates(location)
-    Geocoder.coordinates(location)
+  def self.set_coordinates(trip)
+    Geocoder.coordinates(trip.name)
+    coordinates = Geocoder.coordinates(trip.name)
+    trip.latitude = coordinates[0]
+    trip.longitude = coordinates[1]
   end
 
 end
