@@ -15,6 +15,10 @@ class TripsController < ApplicationController
   # GET /trips/new
   def new
     @trip = Trip.new
+
+    if request.xhr?
+      render partial: 'form'
+    end
   end
 
   # GET /trips/1/edit
@@ -31,8 +35,9 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       if @trip.save
+
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
-        format.json { render :show, status: :created, location: @trip }
+        format.json { render json: @trip }
       else
         format.html { render :new }
         format.json { render json: @trip.errors, status: :unprocessable_entity }
@@ -45,7 +50,7 @@ class TripsController < ApplicationController
   def update
     respond_to do |format|
       if @trip.update(trip_params)
-        format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
+        format.html { redirect_to @user, notice: 'Trip was successfully updated.' }
         format.json { render :show, status: :ok, location: @trip }
       else
         format.html { render :edit }
