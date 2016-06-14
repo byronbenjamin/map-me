@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @trips = @user.trips.all.to_json
+    @trips = @user.trips.order("trips.name").all
   end
 
   # GET /users/new
