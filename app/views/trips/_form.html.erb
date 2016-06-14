@@ -14,14 +14,16 @@
     </div>
   <% end %>
 
-  <%= f.input :name %>
-  <%= f.input :month %>
-  <%= f.input :year %>
+  <%= f.input :name, :label => "Location" %>
+  <%= f.label "Month" %>
+  <%= f.select :month, [ 'January','February','March','April','May','June','July','August','September','October','November','December' ], :prompt => 'Select Month' %>
+  <%= f.input :year, as: :date, label: "Select Year", start_year: Date.today.year, end_year: Date.today.year - 100, discard_day: true, order: [:year], include_blank: false, default: nil, :prompt => 'Select Year' %>
+
   <%= f.input :description %>
   <%= f.label "Method Of Travel" %>
   <%= f.select :method_of_travel, [ 'Airplane', 'Train', 'Boat', 'Other' ], :prompt => 'Select One' %>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Add Trip" %>
   </div>
 <% end %>
