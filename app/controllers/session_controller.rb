@@ -20,6 +20,8 @@ class SessionController < ApplicationController
     end
   end
 
+  private
+  
   def destroy
     log_out
     redirect_to root_url

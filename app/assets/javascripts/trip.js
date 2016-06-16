@@ -31,6 +31,7 @@ $(document).ready(function(){
     })
     .done(function(response){
       console.log(response);
+      $('.no-trips').html("");
       addTripToMap(response);
       $('.trip-list').append("<p class='text-center'>" + response.name + "</p>");
       $('#modal').modal('hide');

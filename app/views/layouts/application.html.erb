@@ -15,7 +15,7 @@
           <ul class="nav pull-right">
             <% if logged_in? %>
               <li><%= link_to(current_user.username, user_path(current_user.id), data: { no_turbolink: true } ) %></li>
-              <li><%= link_to "Log Out", '/logout' %></li>
+              <li><%= link_to "Logout", '/logout' %></li>
             <% else %>
               <li><%= link_to "Register", "#" %></li>
               <li><%= link_to "Log In", "#" %></li>
