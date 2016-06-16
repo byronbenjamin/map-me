@@ -1,6 +1,13 @@
 class SessionController < ApplicationController
   skip_before_action :authorize, only: [:create, :new]
 
+  def new
+    @user = User.new
+    # if request.xhr?
+    # render 'session/new'
+    # end
+  end
+
   def create
     @user = User.find_by(email: params[:session][:email])
     if @user && @user.authenticate(params[:session][:password])
@@ -9,15 +16,8 @@ class SessionController < ApplicationController
       redirect_to user_path(@user)
     else
       @errors = ["Invalid Credentials"]
-      render partial: 'login', locals: {errors: @errors}
+      render 'session/new', locals: {errors: @errors}
     end
-  end
-
-  def new
-    @user = User.new
-    # if request.xhr?
-      render 'session/new'
-    # end
   end
 
   def destroy

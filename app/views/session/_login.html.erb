@@ -1,19 +1,26 @@
-
-<div class="span4">
-<%= simple_form_for(:session) do |f| %>
+<%= simple_form_for(:session, url: session_index_path, html: {class: "well"}) do |f| %>
 
   <fieldset>
     <legend>Sign In</legend>
-  <%= f.input :email %>
-  <%= f.input :password %>
 
-  <div class="actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
+    <% if @errors %>
+      <div id="error_explanation">
 
-</div>
+        <ul>
+        <% @errors.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<div class="span8">
-  <h2>Somthing is gonna go here</h2>
-</div>
+    <%= f.input :email %>
+    <%= f.input :password %>
+
+    <div class="actions">
+      <%= f.button :submit, "Log in" %>
+    </div>
+  <% end %>
+
+
+  

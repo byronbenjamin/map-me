@@ -1,18 +1,9 @@
-
 <div class="row">
   <div class="span4"></div>
   <div class="span4">
-  <%= simple_form_for(:session, url: session_index_path, html: {class: "well"}) do |f| %>
 
-    <fieldset>
-      <legend>Sign In</legend>
-    <%= f.input :email %>
-    <%= f.input :password %>
+    <%= render 'login' %>
 
-    <div class="actions">
-      <%= f.button :submit, "Log in" %>
-    </div>
-  <% end %>
   </div>
-
+  <div class="col-md-4"></div>
 </div>

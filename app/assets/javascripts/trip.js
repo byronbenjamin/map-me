@@ -5,7 +5,7 @@ $(document).ready(function(){
   });
 
   //test for invoking it
-  $('.addTrip').on('click', function(){
+  $('.add-trip').on('click', function(){
 
     $.ajax({
     method: 'GET',
@@ -32,10 +32,9 @@ $(document).ready(function(){
     .done(function(response){
       console.log(response);
       addTripToMap(response);
+      $('.trip-list').append("<p class='text-center'>" + response.name + "</p>");
       $('#modal').modal('hide');
     });
-
-
   });
 
 });
