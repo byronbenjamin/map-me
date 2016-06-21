@@ -1,18 +1,64 @@
 $(document).ready(function(){
-  $( window ).load(function() {
 
-  $.ajax({
-  method: 'GET',
-  url: '/session/new'
+  $('#registration-modal').modal({
+      show: false
+  });
+
+  //test for invoking it
+  $('.register').on('click', function(){
+
+    $.ajax({
+    method: 'GET',
+    url: '/users/new'
   })
   .done(function(response) {
-  console.log(response);
-  $('.form-wrap').html(response);
-  // $('#modal').modal('show');
+    console.log(response);
+    $('#registration-modal .modal-body').html(response);
+    $('#registration-modal').modal('show');
+    });
   });
-});
 
-  $('#modal').modal({
+  $('#login-modal').modal({
+      show: false
+  });
+
+  $('.login').on('click', function(){
+
+    $.ajax({
+    method: 'GET',
+    url: '/session/new'
+  })
+  .done(function(response) {
+    console.log(response);
+    $('#login-modal .modal-body').html(response);
+    $('#login-modal').modal('show');
+    });
+  });
+
+  // $('#login-modal').on('submit', 'form', function(event) {
+  //   event.preventDefault();
+  //   console.log("IM IN there login");
+  //
+  //   $.ajax({
+  //     method: 'POST',
+  //     url: '/session',
+  //     data: $(this).serialize(),
+  //     dataType: 'json',
+  //     beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
+  //   })
+  //   .done(function(response){
+  //     console.log(response);
+  //     $('.no-trips').html("");
+  //     addTripToMap(response);
+  //     $('.trip-list').append("<p class='text-center'>" + response.name + "</p>");
+  //     $('#modal').modal('hide');
+  //   })
+  //   .fail(function(jqxhr, status, errorThrown) {
+  //     $(".error_explanation").replaceWith(jqxhr.responseText);
+  //   });
+  // });
+
+  $('#trip-modal').modal({
       show: false
   });
 
@@ -25,12 +71,12 @@ $(document).ready(function(){
   })
   .done(function(response) {
     // console.log(response);
-    $('#modal .modal-body').html(response);
-    $('#modal').modal('show');
+    $('#trip-modal .modal-body').html(response);
+    $('#trip-modal').modal('show');
     });
   });
 
-  $('.modal').on('submit', 'form', function(event) {
+  $('#trip-modal').on('submit', 'form', function(event) {
     event.preventDefault();
     console.log("IM IN there");
 
@@ -46,7 +92,7 @@ $(document).ready(function(){
       $('.no-trips').html("");
       addTripToMap(response);
       $('.trip-list').append("<p class='text-center'>" + response.name + "</p>");
-      $('#modal').modal('hide');
+      $('#trip-modal').modal('hide');
     })
     .fail(function(jqxhr, status, errorThrown) {
       $(".error_explanation").replaceWith(jqxhr.responseText);

@@ -15,10 +15,12 @@
           <ul class="nav pull-right">
             <% if logged_in? %>
               <li><%= link_to(current_user.username, user_path(current_user.id), data: { no_turbolink: true } ) %></li>
-              <li><%= link_to "Logout", '/logout' %></li>
+              <li><%= link_to "Logout", '/logout' , data: { no_turbolink: true } %></li>
             <% else %>
-              <li><%= link_to "Register", "#" %></li>
-              <li><%= link_to "Log In", "#" %></li>
+
+              <button type="button" class="btn btn-primary register">Register</button>
+              <button type="button" class="btn btn-primary login">Login</button>
+
             <% end %>
           </ul>
         </div>

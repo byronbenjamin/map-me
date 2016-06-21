@@ -3,9 +3,9 @@ class SessionController < ApplicationController
 
   def new
     @user = User.new
-    # if request.xhr?
-    # render 'session/new'
-    # end
+    if request.xhr?
+      render partial: 'login'
+    end
   end
 
   def create

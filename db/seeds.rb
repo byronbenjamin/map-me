@@ -8,5 +8,5 @@
 user1 = User.create!(username: "ashylarry", email: "needlotion@yahoo.com", password: "password")
 user2 = User.create!(username: "ashyashley", email: "needalotlotion@yahoo.com", password: "password")
 
-trip1 = Trip.create!(user_id: user1.id, name: "Miami, Florida", longitude: -80.13000, latitude: 25.78830)
-trip2 = Trip.create!(user_id: user1.id, name: "Seoul, S. Korea", latitude: 37.566535, longitude: 126.97796919999996)
+trip1 = Trip.create!(user_id: user1.id, name: "Miami, Florida", longitude: -80.13000, latitude: 25.78830, month: "May", year: "2014", description: "Went to see the Sox play Marlins", method_of_travel: "Bus")
+trip2 = Trip.create!(user_id: user1.id, name: "Seoul, S. Korea", latitude: 37.566535, longitude: 126.97796919999996, month: "May", year: "2014", description: "Vacation", method_of_travel: "Train")
