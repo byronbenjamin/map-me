@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -12,7 +14,6 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-    root "session#new"
 
     resources :users
 
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
 
     resources :trips
 
+    root "welcome#index"
 
   # Example resource route with options:
   #   resources :products do

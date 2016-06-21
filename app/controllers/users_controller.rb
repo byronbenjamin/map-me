@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  before_action :authenticate!, :except => [:new]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :check_owner, only: [:edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -33,7 +35,7 @@ class UsersController < ApplicationController
         log_in @user
         redirect_to user_path(@user)
       else
-        render 'new' 
+        render 'new'
       end
     # end
   end
@@ -64,6 +66,13 @@ class UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def check_owner
+      if @user != current_user
+        # flash[:notice] = "You are not authorized to do that."
+        redirect_to user_path(@user)
+      end
+    end
+
     def log_in(user)
       session[:user_id] = user.id
     end

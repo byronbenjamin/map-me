@@ -1,0 +1,11 @@
+.unique {
+  /*background-image: url(image-path('dotted-world-map.gif'));*/
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 700px;
+  max-width: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-image: url('dotted-world-map.gif');
+}

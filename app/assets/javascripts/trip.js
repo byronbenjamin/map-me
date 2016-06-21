@@ -1,4 +1,16 @@
 $(document).ready(function(){
+  $( window ).load(function() {
+
+  $.ajax({
+  method: 'GET',
+  url: '/session/new'
+  })
+  .done(function(response) {
+  console.log(response);
+  $('.form-wrap').html(response);
+  // $('#modal').modal('show');
+  });
+});
 
   $('#modal').modal({
       show: false
@@ -35,6 +47,9 @@ $(document).ready(function(){
       addTripToMap(response);
       $('.trip-list').append("<p class='text-center'>" + response.name + "</p>");
       $('#modal').modal('hide');
+    })
+    .fail(function(jqxhr, status, errorThrown) {
+      $(".error_explanation").replaceWith(jqxhr.responseText);
     });
   });
 

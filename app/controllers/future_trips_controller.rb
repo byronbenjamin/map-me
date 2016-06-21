@@ -1,5 +1,7 @@
 class FutureTripsController < ApplicationController
+  before_action :authenticate!, :except => [:new]
   before_action :set_future_trip, only: [:show, :edit, :update, :destroy]
+  before_action :check_owner, only: [:edit, :update, :destroy]
 
   # GET /future_trips
   # GET /future_trips.json

@@ -1,6 +1,7 @@
 class Trip < ActiveRecord::Base
 
   belongs_to :user
+  validates :name, presence: true
 
   def self.set_coordinates(trip)
     Geocoder.coordinates(trip.name)

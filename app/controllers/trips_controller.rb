@@ -1,5 +1,7 @@
 class TripsController < ApplicationController
+  before_action :authenticate!
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_action :check_owner, only: [:edit, :update, :destroy]
 
   # GET /trips
   # GET /trips.json
