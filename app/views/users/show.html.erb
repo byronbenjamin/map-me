@@ -5,6 +5,7 @@
   <p class="text-right"><%= link_to 'Edit Profile', edit_user_path(@user) %></p>
 <% end %>
 <p id="notice"><%= notice %></p>
+<h1 class="text-center"> <%= @user.username%>'s map</h1>
 <div class="section">
   <div id="map-container">
     <div id="map-canvas"></div>
