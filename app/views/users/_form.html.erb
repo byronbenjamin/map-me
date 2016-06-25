@@ -1,4 +1,4 @@
-<%= simple_form_for(@user, html: {class: "well"}) do |f| %>
+<%= simple_form_for(@user) do |f| %>
   <fieldset>
     <legend>Register</legend>
       <% if @user.errors.any? %>
@@ -7,7 +7,7 @@
 
           <ul>
           <% @user.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
+            <li class="text-center"><%= message %></li>
           <% end %>
           </ul>
         </div>

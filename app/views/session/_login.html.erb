@@ -1,18 +1,10 @@
-<%= simple_form_for(:session, url: session_index_path, html: {class: "well"}) do |f| %>
+<%= simple_form_for(:session, url: session_index_path) do |f| %>
 
   <fieldset>
     <legend>Sign In</legend>
 
-    <% if @errors %>
-      <div id="error_explanation">
+    <div id="error_explanation"></div>
 
-        <ul>
-        <% @errors.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
 
     <%= f.input :email %>
     <%= f.input :password %>

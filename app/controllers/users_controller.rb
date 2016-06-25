@@ -32,15 +32,21 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     # respond_to do |format|
-      if @user.save
-        log_in @user
+    if @user.save
+      log_in @user
+      if request.xhr?
+        render :json => {:user_path => user_path(@user)}
+      else
         redirect_to user_path(@user)
+      end
+    else
+      if request.xhr?
+        render partial: 'form'
       else
         render 'new'
       end
-    # end
+    end
   end
 
   # PATCH/PUT /users/1

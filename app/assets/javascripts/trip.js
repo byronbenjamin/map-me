@@ -18,6 +18,32 @@ $(document).ready(function(){
     });
   });
 
+  $('#registration-modal').on('submit', 'form', function(event) {
+    event.preventDefault();
+    console.log("IM IN there registration");
+
+    $.ajax({
+      method: 'POST',
+      url: '/users',
+      data: $(this).serialize(),
+      dataType: 'json',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
+    })
+    .done(function(response){
+      var data = response.user_path;
+      // console.log(data);
+      console.log(data);
+      window.location = data;
+    })
+    .fail(function(response) {
+      console.log(response.responseText)
+      $('#registration-modal .modal-body').html(response.responseText);
+      // var data = JSON.parse(response.responseText);
+      // console.log(response.user_id);
+      // $("#error_explanation").text(data.error);
+    });
+  });
+
   $('#login-modal').modal({
       show: false
   });
@@ -35,28 +61,29 @@ $(document).ready(function(){
     });
   });
 
-  // $('#login-modal').on('submit', 'form', function(event) {
-  //   event.preventDefault();
-  //   console.log("IM IN there login");
-  //
-  //   $.ajax({
-  //     method: 'POST',
-  //     url: '/session',
-  //     data: $(this).serialize(),
-  //     dataType: 'json',
-  //     beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
-  //   })
-  //   .done(function(response){
-  //     console.log(response);
-  //     $('.no-trips').html("");
-  //     addTripToMap(response);
-  //     $('.trip-list').append("<p class='text-center'>" + response.name + "</p>");
-  //     $('#modal').modal('hide');
-  //   })
-  //   .fail(function(jqxhr, status, errorThrown) {
-  //     $(".error_explanation").replaceWith(jqxhr.responseText);
-  //   });
-  // });
+  $('#login-modal').on('submit', 'form', function(event) {
+    event.preventDefault();
+    console.log("IM IN there login");
+
+    $.ajax({
+      method: 'POST',
+      url: '/session',
+      data: $(this).serialize(),
+      dataType: 'json',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
+    })
+    .done(function(response){
+      var data = response.user_path;
+      // console.log(data);
+      console.log(data);
+      window.location = data;
+    })
+    .fail(function(response) {
+      var data = JSON.parse(response.responseText);
+      console.log(data);
+      $("#error_explanation").text(data.error);
+    });
+  });
 
   $('#trip-modal').modal({
       show: false

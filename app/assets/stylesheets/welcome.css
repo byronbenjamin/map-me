@@ -9,3 +9,11 @@
   background-position: center;
   background-image: url('dotted-world-map.gif');
 }
+
+ul {
+    list-style-type: none;
+}
+
+#error_explanation {
+    color: red;
+}

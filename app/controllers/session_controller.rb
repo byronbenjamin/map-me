@@ -11,12 +11,20 @@ class SessionController < ApplicationController
   def create
     @user = User.find_by(email: session_params[:email])
     if @user && @user.authenticate(session_params[:password])
-      puts "logging in"
       log_in @user
-      redirect_to user_path(@user)
+      if request.xhr?
+        render :json => {:user_path => user_path(@user)}
+      else
+        puts "logging in"
+        redirect_to user_path(@user)
+      end
     else
       @errors = ["Invalid Credentials"]
-      render 'session/new', locals: {errors: @errors}
+      if request.xhr?
+        render :json => {:error => "Invalid Credentials"}, :status => 422
+      else
+        render 'session/new', locals: {errors: @errors}
+      end
     end
   end
 
