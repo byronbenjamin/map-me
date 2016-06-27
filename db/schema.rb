@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20160512054642) do
   create_table "future_trips", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
+    t.float    "longitude"
+    t.float    "latitude"
     t.string   "location"
     t.string   "month"
     t.string   "year"

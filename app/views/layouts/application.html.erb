@@ -19,7 +19,7 @@
               <li><%= link_to(current_user.username, user_path(current_user.id), data: { no_turbolink: true } ) %></li>
               <li><%= link_to "Logout", '/logout' , data: { no_turbolink: true } %></li>
             <% else %>
-
+              <span class="glyphicon glyphicon-user"></span>
               <button type="button" class="btn btn-primary register">Register</button>
               <button type="button" class="btn btn-primary login">Login</button>
 

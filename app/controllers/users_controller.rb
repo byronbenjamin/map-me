@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @trips = @user.trips.order("trips.name").all
+    @future_trips = @user.future_trips.order("future_trips.name").all
   end
 
   # GET /users/new

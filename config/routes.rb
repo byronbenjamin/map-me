@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get 'logout' => 'session#destroy'
 
     resources :trips
+    resources :future_trips
 
     root "welcome#index"
 

@@ -126,4 +126,46 @@ $(document).ready(function(){
     });
   });
 
+
+  $('#future-trip-modal').modal({
+      show: false
+  });
+
+  //test for invoking it
+  $('.add-future-trip').on('click', function(){
+
+    $.ajax({
+    method: 'GET',
+    url: '/future_trips/new'
+  })
+  .done(function(response) {
+    // console.log(response);
+    $('#future-trip-modal .modal-body').html(response);
+    $('#future-trip-modal').modal('show');
+    });
+  });
+
+  $('#future-trip-modal').on('submit', 'form', function(event) {
+    event.preventDefault();
+    console.log("IM IN there");
+
+    $.ajax({
+      method: 'POST',
+      url: '/future_trips',
+      data: $(this).serialize(),
+      dataType: 'json',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
+    })
+    .done(function(response){
+      console.log(response);
+      $('.no-trips').html("");
+      addFutureTripToMap(response);
+      $('.future-trip-list').append("<p class='text-center'>" + response.name + "</p>");
+      $('#future-trip-modal').modal('hide');
+    })
+    .fail(function(jqxhr, status, errorThrown) {
+      $(".error_explanation").replaceWith(jqxhr.responseText);
+    });
+  });
+
 });

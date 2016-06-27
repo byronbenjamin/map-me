@@ -1,4 +1,7 @@
-<%= form_for(@future_trip) do |f| %>
+<%= simple_form_for(@future_trip) do |f| %>
+
+  <legend> Add Future Trip </legend>
+
   <% if @future_trip.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@future_trip.errors.count, "error") %> prohibited this future_trip from being saved:</h2>
@@ -10,6 +13,12 @@
       </ul>
     </div>
   <% end %>
+
+  <%= f.input :name, :label => "Location" %>
+  <%= f.label "Month" %>
+  <%= f.select :month, [ 'January','February','March','April','May','June','July','August','September','October','November','December' ], :prompt => 'Select Month' %>
+  <%= f.input :year, :label => "Year" %>
+  <%= f.input :description %>
 
   <div class="actions">
     <%= f.submit %>

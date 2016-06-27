@@ -17,7 +17,6 @@ class TripsController < ApplicationController
   # GET /trips/new
   def new
     @trip = Trip.new
-
     if request.xhr?
       render partial: 'form'
     end

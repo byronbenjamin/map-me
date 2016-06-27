@@ -17,6 +17,9 @@ class FutureTripsController < ApplicationController
   # GET /future_trips/new
   def new
     @future_trip = FutureTrip.new
+    if request.xhr?
+      render partial: 'form'
+    end
   end
 
   # GET /future_trips/1/edit
@@ -26,12 +29,16 @@ class FutureTripsController < ApplicationController
   # POST /future_trips
   # POST /future_trips.json
   def create
-    @future_trip = FutureTrip.new(future_trip_params)
+    @user = User.find(session[:user_id])
+    coordinates = Geocoder.coordinates(future_trip_params[:name])
+    @future_trip = @user.future_trips.new(future_trip_params)
+    FutureTrip.set_coordinates(@future_trip)
 
     respond_to do |format|
       if @future_trip.save
+
         format.html { redirect_to @future_trip, notice: 'Future trip was successfully created.' }
-        format.json { render :show, status: :created, location: @future_trip }
+        format.json { render json: @future_trip }
       else
         format.html { render :new }
         format.json { render json: @future_trip.errors, status: :unprocessable_entity }
@@ -71,6 +78,6 @@ class FutureTripsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def future_trip_params
-      params.require(:future_trip).permit(:user_id, :location, :month, :year, :description)
+      params.require(:future_trip).permit(:name, :user_id, :latitude, :longitude, :month, :year, :description)
     end
 end
